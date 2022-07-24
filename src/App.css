@@ -1,16 +1,16 @@
 .title {
-    color: #fd5959;
-    text-align: center;
+  color: #fd5959;
+  text-align: center;
 }
-.female{
-    background-color: #afc5ff;
-    border-radius: 10px;
-    color: #ff5722;
-    height: 30px;
+.female {
+  background-color: #afc5ff;
+  border-radius: 10px;
+  color: #ff5722;
+  height: 30px;
 }
-.male{
-    background-color: #fcff82;
-    border-radius: 10px;
-    color: #ff5722;
-    height: 30px;
+.male {
+  background-color: #fcff82;
+  border-radius: 10px;
+  color: #ff5722;
+  height: 30px;
 }

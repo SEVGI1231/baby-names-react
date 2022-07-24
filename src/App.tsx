@@ -1,10 +1,8 @@
 import { BabyNamesStore } from "./babyNames";
-import './App.css';
+import "./App.css";
 
 function App(): JSX.Element {
-  return (
-    <BabyNamesStore />
-  )
+  return <BabyNamesStore />;
 }
 
 export default App;
