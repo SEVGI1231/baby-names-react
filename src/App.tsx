@@ -1,7 +1,10 @@
-import { greet } from "./utils/greet";
+import { BabyNamesStore } from "./babyNames";
+import './App.css';
 
 function App(): JSX.Element {
-  return <h1>{greet("World")}</h1>;
+  return (
+    <BabyNamesStore />
+  )
 }
 
 export default App;
