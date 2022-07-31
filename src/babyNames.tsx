@@ -17,10 +17,6 @@ export function BabyNamesStore(): JSX.Element {
   const [faveNames, setFaveName] = useState<babyNamesData[]>([]);
   //console.log("this is faveNames after rendering", faveNames)
 
-  function handleChangeToInput(event: any) {
-    setSearchTerm(event.target.value);
-  }
-
   const filteredBabyNames = matchSearchedTerm(sortedBabyNameData, searchTerm);
 
   function handleAddToFaves(baby: babyNamesData) {
@@ -34,7 +30,7 @@ export function BabyNamesStore(): JSX.Element {
       <div>
         <input
           type="text"
-          onChange={handleChangeToInput}
+          onChange={(e) => setSearchTerm(e.target.value)}
           value={searchTerm}
           placeholder="type here"
         ></input>
