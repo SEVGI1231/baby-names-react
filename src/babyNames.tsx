@@ -1,48 +1,69 @@
 import { useState } from "react";
 import babyNameData from "./babyNamesData.json";
+import { matchSearchedTerm } from "./matchSearchedTerm";
 
-interface babyNamesData{
+export interface babyNamesData {
   id: number;
-  name:string;
+  name: string;
   sex: string;
-
 }
 
 export function BabyNamesStore(): JSX.Element {
-  const sortedBabyNameData :babyNamesData[]= [...babyNameData].sort((a, b) =>
+  const sortedBabyNameData: babyNamesData[] = [...babyNameData].sort((a, b) =>
     a.name > b.name ? 1 : -1
   );
+  //const favesList: babyNamesData[]=[];
   const [searchTerm, setSearchTerm] = useState<string>("");
-  
- function handleChangeToInput(event:any){
-  setSearchTerm(event.target.value)
- }
+  const [faveNames, setFaveName] = useState<babyNamesData[]>([]);
+  //console.log("this is faveNames after rendering", faveNames)
 
- function matchSearchedTerm(
-  babyData: babyNamesData[], searchValue:string):babyNamesData[]{
-  function callBackFunc(oneBabyName:babyNamesData):boolean{
-   return oneBabyName.name.toLowerCase().includes(searchValue.toLowerCase())
-  } 
-  return babyData.filter(callBackFunc)
- }
+  function handleChangeToInput(event: any) {
+    setSearchTerm(event.target.value);
+  }
+
   const filteredBabyNames = matchSearchedTerm(sortedBabyNameData, searchTerm);
+
+  function handleAddToFaves(baby: babyNamesData) {
+    const newFavesList = [...faveNames, baby];
+    setFaveName(newFavesList);
+    console.log(faveNames);
+  }
   return (
     <>
       <h1 className="title">Baby Names</h1>
       <div>
-        <input type= "text" onChange={handleChangeToInput} value={searchTerm} placeholder="type here"></input>
+        <input
+          type="text"
+          onChange={handleChangeToInput}
+          value={searchTerm}
+          placeholder="type here"
+        ></input>
       </div>
-      {filteredBabyNames.map((baby) => {
-        return (
+      <div className="filter">
+        <h2>Favourites</h2>
+        {faveNames.map((baby) => {
+          return (
+            <button
+              key={baby.id}
+              className={baby.sex === "f" ? "female" : "male"}
+            >
+              {baby.name}
+            </button>
+          );
+        })}
+      </div>
+      <div className="main-baby-list">
+        <h2>Main List</h2>
+        {filteredBabyNames.map((baby) => (
           <button
             key={baby.id}
             className={baby.sex === "f" ? "female" : "male"}
+            onClick={() => handleAddToFaves(baby)}
           >
             {baby.name}
           </button>
-        );
-      })}
+        ))}
+      </div>
     </>
   );
 }
-// <div className={...(condition ? { className: 'on' } : {})}>
